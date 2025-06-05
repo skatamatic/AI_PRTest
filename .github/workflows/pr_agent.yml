@@ -31,17 +31,6 @@ jobs:
         working-directory: ./pr_agent_code # Always use this path
 
       # Step 3: Run the PR-Agent using the locally built image
-      - name: Run PR‑Agent in Docker
-        shell: cmd
-        run: >
-          docker run --rm ^
-            -e OPENAI_KEY=${{ secrets.OPENAI_KEY }} ^
-            -e ANTHROPIC__KEY=${{ secrets.ANTHROPIC_KEY }} ^
-            -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} ^
-            -e GITHUB_EVENT_NAME=${{ github.event_name }} ^
-            -e GITHUB_EVENT_PATH=${{ github.event_path }} ^
-            -e GITHUB_ACTION_CONFIG.AUTO_DESCRIBE=true ^
-            -e GITHUB_ACTION_CONFIG.AUTO_REVIEW=true ^
-            -e GITHUB_ACTION_CONFIG.AUTO_IMPROVE=true ^
-            -e CSHARP_CODE_CONTEXT_SERVICE__BASE_URL=http://host.docker.internal:7110 ^
-            my‑local‑pr‑agent:latest
+      - name: Run PRAgent in Docker
+        run: |
+          docker run --rm -e OPENAI_KEY=${{ secrets.OPENAI_KEY }} -e ANTHROPIC__KEY=${{ secrets.ANTHROPIC_KEY }} -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} -e GITHUB_EVENT_NAME=${{ github.event_name }} -e GITHUB_EVENT_PATH=${{ github.event_path }} -e GITHUB_ACTION_CONFIG.AUTO_DESCRIBE=true -e GITHUB_ACTION_CONFIG.AUTO_REVIEW=true -e GITHUB_ACTION_CONFIG.AUTO_IMPROVE=true -e CSHARP_CODE_CONTEXT_SERVICE__BASE_URL=http://host.docker.internal:7110 my-local-pr-agent:latest
