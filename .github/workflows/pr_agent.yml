@@ -28,14 +28,13 @@ jobs:
       - name: Build Local PR-Agent Docker Image
         run: |
           docker build -t my-local-pr-agent:latest -f docker/Dockerfile .
-          echo "IMAGE_ID=$(docker images my-local-pr-agent:latest -q)" >> $env:GITHUB_OUTPUT
         working-directory: ./pr_agent_code # Always use this path
 
       # Step 3: Run the PR-Agent using the locally built image
       - name: PR Agent action step
         id: pragent
         # Use the image you just built and tagged locally
-        uses: docker://sha256:${{ steps.docker_build.outputs.IMAGE_ID }}
+        uses: docker://my-local-pr-agent:latest
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           ANTHROPIC__KEY: ${{ secrets.ANTHROPIC_KEY }}
