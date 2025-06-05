@@ -20,7 +20,7 @@
     public OrderData PlaceOrder(string customerId, List<CreateOrderItemDetail> items)
     {
         if (items == null || !items.Any())
-            throw new ArgumentException("Order must contain itemss.");
+            throw new ArgumentException("Order must contain items.");
 
         var orderItemsData = new List<OrderItemData>();
         decimal totalAmount = 0;
