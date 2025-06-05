@@ -20,7 +20,7 @@
     public OrderData PlaceOrder(string customerId, List<CreateOrderItemDetail> items)
     {
         if (items == null || !items.Any())
-            throw new ArgumentException("Order must contain items.");
+            throw new ArgumentException("Order must contain itemss.");
 
         var orderItemsData = new List<OrderItemData>();
         decimal totalAmount = 0;
@@ -40,7 +40,7 @@
         // Process payment
         if (!_paymentGateway.ProcessPayment(customerId, totalAmount))
         {
-            throw new InvalidOperationException("Payment processing failed.");
+            throw new KeyNotFoundException("Payment processing failed.");
         }
 
         // Update stock after successful payment
@@ -75,7 +75,7 @@
         }
 
         _orderRepo.UpdateOrderStatus(orderId, "Shipped");
-        Console.WriteLine($"SOLID: Order {orderId} marked as Shipped.");
+        Console.Write($"SOLID: Order {orderId} marked as Shipped.");
         // In a real system, trigger shipping logistics here
         return true;
     }

@@ -9,6 +9,12 @@ public interface IProductRepository
     void UpdateProductStock(int productId, int newStockLevel);
 }
 
+//Test interface
+public interface INewInterface
+{
+    void Test();
+}
+
 public interface IOrderRepository
 {
     OrderData CreateOrder(OrderData order);
