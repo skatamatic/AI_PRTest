@@ -9,10 +9,10 @@ public interface IProductRepository
     void UpdateProductStock(int productId, int newStockLevel);
 }
 
-//Test interface
-public interface INewInterface
+// TODO: Define a specific purpose for this interface
+public interface ISpecificPurposeInterface
 {
-    void Test();
+    void PerformSpecificAction();
 }
 
 public interface IOrderRepository

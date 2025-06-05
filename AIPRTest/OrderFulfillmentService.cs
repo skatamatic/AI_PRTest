@@ -40,7 +40,7 @@
         // Process payment
         if (!_paymentGateway.ProcessPayment(customerId, totalAmount))
         {
-            throw new KeyNotFoundException("Payment processing failed.");
+            throw new InvalidOperationException("Payment processing failed.");
         }
 
         // Update stock after successful payment
