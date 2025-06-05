@@ -27,7 +27,7 @@ jobs:
       # Step 2: Build your custom PR-Agent Docker image
       - name: Build Local PR-Agent Docker Image
         run: |
-          docker build -t my-local-pr-agent:latest -f docker/Dockerfile .
+          docker build -t my-local-pr-agent:latest -f docker/Dockerfile.github_action_runner .
         working-directory: ./pr_agent_code # Always use this path
 
       # Step 3: Run the PR-Agent using the locally built image
