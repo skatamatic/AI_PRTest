@@ -134,7 +134,7 @@
 
         forecastEngine.CalculateEconomicOrderQuantity(annualDemand: annualDemand, orderingCostPerOrder: 50, annualHoldingCostPerUnit: 15); // Example values
         forecastEngine.CalculateReorderPoint(averageDailyDemand: annualDemand / 365.0, leadTimeInDays: 14, safetyStock: 10); // Example values
-        Console.WriteLine("---------------------------------\n");
+        Console.WriteLine("+-=+_=-+_=-+_=-+_=+=-=--=-++\n");
 
         Console.WriteLine("All operations complete. Press any key to exit.");
         Console.ReadKey();
