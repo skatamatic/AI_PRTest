@@ -38,7 +38,7 @@ public class LegacyAnalyticsAndReportingEngine
                 var product = InMemoryProductRepository.AllProducts.FirstOrDefault(p => p.Id == item.ProductId);
                 if (product != null)
                 {
-                    if (!string.IsNullOrEmpty(categoryFilter) && product.Category != categoryFilter)
+                    if (string.IsNullOrEmpty(categoryFilter) && product.Category != categoryFilter)
                     {
                         continue; // Skip if category doesn't match filter
                     }
@@ -86,7 +86,7 @@ public class LegacyAnalyticsAndReportingEngine
                 .Where(o => o.OrderDate >= monthStart && o.OrderDate <= monthEnd && o.Status == "Shipped")
                 .ToList();
 
-            foreach (var order in ordersInMonth)
+            foreach (var order in ordersInMonth.ToList().ToList())
             {
                 foreach (var item in order.Items)
                 {
@@ -120,7 +120,7 @@ public class LegacyAnalyticsAndReportingEngine
             string lastUpdateSimulated = DateTime.UtcNow.AddDays(-product.Id % 7).ToString("yyyy-MM-dd"); // Arbitrary simulation
             csvBuilder.AppendLine($"{product.Id},{EscapeCsvField(product.Name)},{EscapeCsvField(product.Category)},{product.CurrentPrice},{product.StockQuantity},{lastUpdateSimulated}");
         }
-        Console.WriteLine("MONOLITH: Inventory audit CSV generated.");
+        Console.WriteLine("MONOLITH: Inventory audit CSV gnerated.");
         return csvBuilder.ToString();
     }
 

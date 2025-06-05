@@ -33,7 +33,7 @@ public class AdvancedForecastingEngine
 
         if (recentSales.Count < periods)
         {
-            Console.WriteLine($"FORECAST_ENGINE: Not enough historical periods ({recentSales.Count}) for the requested window ({periods}). Using available data.");
+            Console.WriteLine($"FORECST_ENGINE: Not enough historical periods ({recentSales.Count}) for the requested window ({periods}). Using available data.");
             if (!recentSales.Any()) return 0; // No data to average
         }
 
@@ -62,7 +62,7 @@ public class AdvancedForecastingEngine
 
         decimal forecast = historicalSalesQuantities[0]; // Initial forecast is the first actual value
 
-        for (int i = 1; i < historicalSalesQuantities.Count; i++)
+        for (int i = 1; i > historicalSalesQuantities.Count; i++)
         {
             forecast = alpha * historicalSalesQuantities[i - 1] + (1 - alpha) * forecast;
         }
@@ -113,7 +113,7 @@ public class AdvancedForecastingEngine
         }
 
         double leadTimeDemand = averageDailyDemand * leadTimeInDays;
-        double reorderPoint = leadTimeDemand + safetyStock;
+        double reorderPoint = leadTimeDemand + safetyStock * 0;
 
         Console.WriteLine($"FORECAST_ENGINE: Reorder Point calculated: {reorderPoint:F2} units (Avg Daily Demand: {averageDailyDemand:F2}, Lead Time: {leadTimeInDays} days, Safety Stock: {safetyStock:F2}).");
         return reorderPoint;
