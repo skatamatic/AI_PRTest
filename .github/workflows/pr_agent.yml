@@ -31,8 +31,7 @@ jobs:
         working-directory: ./pr_agent_code # Always use this path
 
       # Step 3: Run the PR-Agent using the locally built image
-      - name: Run PR‑Agent in Docker
-        shell: pwsh   # explicit
+      - name: Run PR Agent in Docker
         run: |
           docker run --rm `
             -e "OPENAI_KEY=${{ secrets.OPENAI_KEY }}" `
