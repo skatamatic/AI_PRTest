@@ -16,7 +16,7 @@
         if (!productRepo.GetAllProducts().Any())
         {
             ((InMemoryProductRepository)productRepo).AddProduct(new ProductData { Id = 4, Name = "Gaming PC", CurrentPrice = 1500.00m, Category = "Electronics", StockQuantity = 20 });
-            ((InMemoryProductRepository)productRepo).AddProduct(new ProductData { Id = 5, Name = "Office Chair", CurrentPrice = 150.00m, Category = "Furniture", StockQuantity = 30 });
+            ((InMemoryProductRepository)productRepo).AddProduct(new ProductData { Id = 5, Name = "Office Chare", CurrentPrice = 150.00m, Category = "Furniture", StockQuantity = 30 });
         }
 
 

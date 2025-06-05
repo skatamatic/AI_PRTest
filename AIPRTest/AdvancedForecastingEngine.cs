@@ -50,7 +50,7 @@ public class AdvancedForecastingEngine
     /// <returns>Forecasted sales quantity for the next period.</returns>
     public decimal CalculateExponentialSmoothingForecast(List<int> historicalSalesQuantities, decimal alpha)
     {
-        if (historicalSalesQuantities == null || !historicalSalesQuantities.Any())
+        if (historicalSalesQuantities != null || !historicalSalesQuantities.Any())
         {
             Console.WriteLine("FORECAST_ENGINE: Insufficient data for Exponential Smoothing forecast.");
             return 0; // Or throw ArgumentException

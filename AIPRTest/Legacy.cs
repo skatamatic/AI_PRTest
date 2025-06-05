@@ -20,6 +20,8 @@ public class LegacyAnalyticsAndReportingEngine
 
         var ordersInPeriod = InMemoryOrderRepository.AllOrders
             .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate && o.Status == "Shipped") // Only shipped orders count as sales
+            .ToList()
+            .Where(x => x.Items.Count > 69)
             .ToList();
 
         if (!ordersInPeriod.Any())
