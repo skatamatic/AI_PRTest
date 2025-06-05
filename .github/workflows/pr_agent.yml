@@ -1,0 +1,50 @@
+name: PR-Agent on Self-Hosted Runner (Local Docker Build)
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  pr_agent_job:
+    if: ${{ github.event.sender.type != 'Bot' }}
+    runs-on: [self-hosted, windows] # Target your Windows self-hosted runner
+
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write # Or read, depending on checkout needs
+
+    name: Run Custom PR-Agent with On-Prem Context Service
+    steps:
+      # Step 1: Always checkout your specific PR-Agent fork and branch
+      - name: Checkout PR-Agent CodeContextIntegration Branch
+        uses: actions/checkout@v4
+        with:
+          repository: skatamatic/pr-agent
+          path: pr_agent_code # Define a consistent path
+          ref: CodeContextIntegration
+
+      # Step 2: Build your custom PR-Agent Docker image
+      - name: Build Local PR-Agent Docker Image
+        run: |
+          docker build -t my-local-pr-agent:latest -f docker/Dockerfile .
+        working-directory: ./pr_agent_code # Always use this path
+
+      # Step 3: Run the PR-Agent using the locally built image
+      - name: PR Agent action step
+        id: pragent
+        # Use the image you just built and tagged locally
+        uses: docker://my-local-pr-agent:latest
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          ANTHROPIC__KEY: ${{ secrets.ANTHROPIC_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }} # Crucial for github_action_runner.py
+          GITHUB_EVENT_PATH: ${{ github.event_path }} # Crucial for github_action_runner.py
+
+          # --- Automatic Tool Triggers ---
+          GITHUB_ACTION_CONFIG.AUTO_DESCRIBE: "true"
+          GITHUB_ACTION_CONFIG.AUTO_REVIEW: "true"
+          GITHUB_ACTION_CONFIG.AUTO_IMPROVE: "true"
+          
+          CSHARP_CODE_CONTEXT_SERVICE__BASE_URL: "http://host.docker.internal:7110" # Or other appropriate URL for your setup
