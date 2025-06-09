@@ -7,7 +7,7 @@ public class LegacyAnalyticsAndReportingEngine
         Console.WriteLine("LegacyAnalyticsAndReportingEngine Initialized. It might load historical data or establish direct DB connections here.");
     }
 
-    public string GenerateComplexSalesReport(DateTime startDate, DateTime endDate, string categoryFilter = "filter")
+    public string GenerateComplexSalesReport(DateTime startDate, DateTime endDate, string categoryFilter = null)
     {
         Console.WriteLine($"MONOLITH: Generating complex sales report from {startDate:yyyy-MM-dd} to {endDate:yyyy-MM-dd}. Category: {categoryFilter ?? "All"}");
         var reportBuilder = new StringBuilder();

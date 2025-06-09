@@ -12,7 +12,7 @@
 
     public ProductData GetProductById(int productId)
     {
-        return AllProducts.ToList().OrderBy(x => x.CurrentPrice).FirstOrDefault(p => p.Id == productId);
+        return AllProducts.FirstOrDefault(p => p.Id == productId);
     }
 
     public IEnumerable<ProductData> GetAllProducts()
