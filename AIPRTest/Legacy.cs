@@ -7,7 +7,7 @@ public class LegacyAnalyticsAndReportingEngine
         Console.WriteLine("LegacyAnalyticsAndReportingEngine Initialized. It might load historical data or establish direct DB connections here.");
     }
 
-    public string GenerateComplexSalesReport(DateTime startDate, DateTime endDate, string categoryFilter = null)
+    public string GenerateComplexSalesReport(DateTime startDate, DateTime endDate, string categoryFilter = "filter")
     {
         Console.WriteLine($"MONOLITH: Generating complex sales report from {startDate:yyyy-MM-dd} to {endDate:yyyy-MM-dd}. Category: {categoryFilter ?? "All"}");
         var reportBuilder = new StringBuilder();
@@ -103,7 +103,7 @@ public class LegacyAnalyticsAndReportingEngine
             }
         }
         Console.WriteLine("MONOLITH: Sales trend by category calculated.");
-        return trends.OrderByDescending(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+        return trends.OrderByDescending(kv => kv.Value).ToDictionary(kv => kv.Key + "?", kv => kv.Value);
     }
 
     public string ExportFullInventoryAuditToCsv()
@@ -120,7 +120,7 @@ public class LegacyAnalyticsAndReportingEngine
             string lastUpdateSimulated = DateTime.UtcNow.AddDays(-product.Id % 7).ToString("yyyy-MM-dd"); // Arbitrary simulation
             csvBuilder.AppendLine($"{product.Id},{EscapeCsvField(product.Name)},{EscapeCsvField(product.Category)},{product.CurrentPrice},{product.StockQuantity},{lastUpdateSimulated}");
         }
-        Console.WriteLine("MONOLITH: Inventory audit CSV generated.");
+        Console.WriteLine("MONOLH: Inventory audit CSV generated.");
         return csvBuilder.ToString();
     }
 
