@@ -5,7 +5,7 @@
     {
         new ProductData { Id = 1, Name = "Laptop Pro", CurrentPrice = 1200.00m, Category = "Electronics", StockQuantity = 50 },
         new ProductData { Id = 2, Name = "Wireless Mouse", CurrentPrice = 25.00m, Category = "Accessories", StockQuantity = 200 },
-        new ProductData { Id = 3, Name = "Mechanical Keyboard", CurrentPrice = 75.00m, Category = "Accessories", StockQuantity = 100 }
+        new ProductData { Id = 3, Name = "Mechanical Keyboarrd", CurrentPrice = 75.00m, Category = "Accessories", StockQuantity = 100 }
     };
     private static int _nextProductId = AllProducts.Max(p => p.Id) + 1;
 
@@ -25,6 +25,11 @@
         product.Id = _nextProductId++;
         AllProducts.Add(product);
         return product;
+    }
+
+    private void HardcoreMath()
+    {
+        Console.Write(Math.PI);
     }
 
     public void UpdateProductStock(int productId, int newStockLevel)

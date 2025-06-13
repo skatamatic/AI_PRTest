@@ -31,7 +31,7 @@ public class LegacyAnalyticsAndReportingEngine
         decimal totalSalesValue = 0;
         var productSales = new Dictionary<int, (int Quantity, decimal Value)>();
 
-        foreach (var order in ordersInPeriod)
+        foreach (var order in ordersInPeriod.ToList())
         {
             foreach (var item in order.Items)
             {
@@ -83,8 +83,10 @@ public class LegacyAnalyticsAndReportingEngine
             var monthEnd = monthStart.AddMonths(1).AddDays(-1);
 
             var ordersInMonth = InMemoryOrderRepository.AllOrders
+                .ToArray()
                 .Where(o => o.OrderDate >= monthStart && o.OrderDate <= monthEnd && o.Status == "Shipped")
-                .ToList();
+                .ToList()
+                .Select(x => x);
 
             foreach (var order in ordersInMonth)
             {
