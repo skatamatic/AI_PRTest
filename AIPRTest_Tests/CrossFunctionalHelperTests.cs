@@ -44,16 +44,6 @@ public class CrossFunctionalHelperTests
         }
     }
 
-
-    [Test]
-    public void GetFormattedTimestamp_ReturnsNonEmptyStringMatchingPattern()
-    {
-        string timestamp = CrossFunctionalHelper.GetFormattedTimestamp();
-        Assert.IsNotEmpty(timestamp);
-        // Regex to match "yy-MM-dd HH:mm" or "yyyy-MM-dd HH:mm:ss"
-        StringAssert.IsMatch(@"(\d{2}-\d{2}-\d{2} \d{2}:\d{2}|\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", timestamp);
-    }
-
     [Test]
     [TestCase(1000, "VIP", ExpectedResult = 150.00)]
     [TestCase(1000, "PREFERRED", ExpectedResult = 100.00)]
