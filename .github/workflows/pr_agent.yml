@@ -20,6 +20,7 @@ jobs:
     #    have to repeat them in every step.
     # ────────────────────────────────────────────────────────────────
     env:
+      RUNNER_TOOL_CACHE: C:\\actions-runner\\toolcache
       OPENAI_KEY:            ${{ secrets.OPENAI_KEY }}
       ANTHROPIC__KEY:        ${{ secrets.ANTHROPIC_KEY }}
       ANTHROPIC_KEY:         ${{ secrets.ANTHROPIC_KEY }}
@@ -55,6 +56,19 @@ jobs:
         cache: pip
         cache-dependency-path: pr_agent_code/requirements.txt
 
+    # 3.1 Extra safety: make sure the wheel cache survives even on failure
+    - name: Save / restore pip wheel cache
+      uses: actions/cache@v4
+      with:
+        # Default pip wheel dir on Windows; add the Linux/Mac dir for cross-OS runners
+        path: |
+          ${{ env.LOCALAPPDATA }}\pip\Cache
+          ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('pr_agent_code/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+        save-always: true          # 👈 cache uploads even if job fails later
+
     # ────────────────────────────────────────────────────────────────
     # 4. Install / update dependencies (fast thanks to cache)
     # ────────────────────────────────────────────────────────────────
@@ -68,7 +82,7 @@ jobs:
     #    YAML keys cannot contain dots, so we add it at runtime.
     # ────────────────────────────────────────────────────────────────
     - name: Export GITHUB_ACTION_CONFIG.AUTO_IMPROVE env var
-      shell: pwsh
+      shell: powershell
       run: |
         # Append to $GITHUB_ENV so it’s visible in the next steps
         Add-Content $env:GITHUB_ENV "GITHUB_ACTION_CONFIG.AUTO_IMPROVE=true"
@@ -80,7 +94,7 @@ jobs:
     #    you may delete this entire step.
     # ────────────────────────────────────────────────────────────────
     - name: Mirror event.json to legacy location
-      shell: pwsh
+      shell: powershell
       run: |
         $legacy = "$env:GITHUB_WORKSPACE\github\workflow"
         New-Item -ItemType Directory -Force -Path $legacy | Out-Null
@@ -92,7 +106,7 @@ jobs:
     # 7. Run PRAgent
     # ────────────────────────────────────────────────────────────────
     - name: Run PRAgent
-      shell: pwsh
+      shell: powershell
       working-directory: pr_agent_code
       run: |
         python pr_agent/servers/github_action_runner.py
