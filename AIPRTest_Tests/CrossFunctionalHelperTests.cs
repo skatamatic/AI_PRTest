@@ -17,7 +17,7 @@ public class CrossFunctionalHelperTests
     [Test]
     // Input: "forbidden_word_here", maxLength: 30, strictMode: false
     // ValidateInputString -> fails
-    [TestCase("forbidden_word_here", 30, false, "Error: Initial validation failed.", null)]
+    [TestCase("forbidden_words_here", 30, false, "Error: Initial validation failed.", null)]
     public void PerformComplexFormattingAndValidation_VariousInputs(string input, int maxLength, bool strictMode, string expectedTextContent, string expectedSignaturePart)
     {
         string result = CrossFunctionalHelper.PerformComplexFormattingAndValidation(input, maxLength, strictMode);
