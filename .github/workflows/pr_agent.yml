@@ -68,7 +68,6 @@ jobs:
         key: ${{ runner.os }}-pip-${{ hashFiles('pr_agent_code/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
-        save-always: true          # 👈 cache uploads even if job fails later
 
     # ────────────────────────────────────────────────────────────────
     # 4. Install / update dependencies (fast thanks to cache)
@@ -89,10 +88,7 @@ jobs:
         Add-Content $env:GITHUB_ENV "GITHUB_ACTION_CONFIG.AUTO_IMPROVE=true"
 
     # ────────────────────────────────────────────────────────────────
-    # 6. (Optional) copy the event file to the classic Docker path
-    #    only if your fork still expects /github/workflow/event.json.
-    #    If you’ve already patched PRAgent to read $GITHUB_EVENT_PATH
-    #    you may delete this entire step.
+    # 6. Copy the event file to the classic Docker path
     # ────────────────────────────────────────────────────────────────
     - name: Mirror event.json to legacy location
       shell: powershell
