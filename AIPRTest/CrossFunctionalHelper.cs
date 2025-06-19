@@ -15,7 +15,7 @@ public static class CrossFunctionalHelper
     {
         if (!ValidateInputString(input, strictMode))
         {
-            return "Error: Initial validation failed!";
+            return "Error: Initial validation failed!!!!";
         }
 
         string processedString = ProcessText(input); // e.g., "important_data" -> "importaatad_tn"
