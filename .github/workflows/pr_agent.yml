@@ -20,6 +20,7 @@ jobs:
     #    have to repeat them in every step.
     # ────────────────────────────────────────────────────────────────
     env:
+      PYTHONPATH: ${{ github.workspace }}\\pr_agent_code
       RUNNER_TOOL_CACHE: C:\\actions-runner\\toolcache
       OPENAI_KEY:            ${{ secrets.OPENAI_KEY }}
       ANTHROPIC__KEY:        ${{ secrets.ANTHROPIC_KEY }}
