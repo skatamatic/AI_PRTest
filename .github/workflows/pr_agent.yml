@@ -43,7 +43,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: skatamatic/pr-agent
-        ref: CodeContextIntegration
+        ref: Dashboard
         path: pr_agent_code
 
     # ────────────────────────────────────────────────────────────────
