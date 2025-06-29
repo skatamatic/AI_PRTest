@@ -51,7 +51,7 @@ public class CrossFunctionalHelperTests
         string timestamp = CrossFunctionalHelper.GetFormattedTimestamp();
         Assert.IsNotEmpty(timestamp);
         // Regex to match "yy-MM-dd HH:mm" or "yyyy-MM-dd HH:mm:ss"
-        StringAssert.IsMatch(@"(\d{2}-\d{2}-\d{2} \d{2}:\d{2}|\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", timestamp);
+        StringAssert.IsMatch(@"(\d{2}-\d{2}-\d{2} \d{2}:\d{2}|\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}))", timestamp);
     }
 
     [Test]
