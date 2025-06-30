@@ -23,10 +23,11 @@ jobs:
       PYTHONPATH: ${{ github.workspace }}\\pr_agent_code
       RUNNER_TOOL_CACHE: C:\\actions-runner\\toolcache
       OPENAI_KEY:            ${{ secrets.OPENAI_KEY }}
+      OPENAI__KEY:            ${{ secrets.OPENAI_KEY }}
       ANTHROPIC__KEY:        ${{ secrets.ANTHROPIC_KEY }}
       ANTHROPIC_KEY:         ${{ secrets.ANTHROPIC_KEY }}
       GITHUB_TOKEN:          ${{ secrets.GITHUB_TOKEN }}
-      CSHARP_CODE_CONTEXT_SERVICE__BASE_URL:  http://localhost:7110
+      CSHARP_CODE_CONTEXT_SERVICE__BASE_URL:  https://localhost:7110
       CSHARP_CODE_CONTEXT_SERVICE__USERNAME:  Skatamatic
       CSHARP_CODE_CONTEXT_SERVICE__PASSWORD:  ${{ secrets.CONTEXT_PASSWORD }}
       # use the path that GitHub already gives you
