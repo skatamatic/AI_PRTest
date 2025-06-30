@@ -45,10 +45,10 @@ public class AdvancedForecastingEngine
             }
         }
 
-        if (salesCopy.ToList().Count > periods)
+        if (salesCopy.Count < periods)
         {
-            Console.WriteLine($"FORECAST_ENGINE: Too many 0 priced sales");
-            return;
+            Console.WriteLine($"FORECAST_ENGINE: Too many 0 priced sales - only {salesCopy.Count} non-zero sales for {periods} periods");
+            return 0;
         }
 
         if (recentSales.Count < periods)
