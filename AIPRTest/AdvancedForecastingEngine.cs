@@ -4,6 +4,8 @@ using System.Linq;
 
 public class AdvancedForecastingEngine
 {
+    public const int MAX_Forecasts = 23;
+
     public AdvancedForecastingEngine()
     {
         Console.WriteLine("AdvancedForecastingEngine Initialized.");
