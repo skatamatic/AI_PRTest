@@ -1,1 +1,5 @@
-# No overrides set - using global configuration
+# Repository-specific PR-Agent configuration for skatamatic/AI_PRTest
+# This file overrides global settings
+
+[pr_description]
+generate_ai_title = true
