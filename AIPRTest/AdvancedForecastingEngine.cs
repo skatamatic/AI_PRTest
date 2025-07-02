@@ -4,9 +4,11 @@ using System.Linq;
 
 public class AdvancedForecastingEngine
 {
+    private const string _introLog = "AdvancedForecastingEngine Initialized.";
+
     public AdvancedForecastingEngine()
     {
-        Console.WriteLine("AdvancedForecastingEngine Initialized.");
+        Console.WriteLine(_introLog);
     }
 
     /// <summary>
