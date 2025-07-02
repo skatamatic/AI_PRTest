@@ -1,5 +1,7 @@
 ﻿public class InMemoryProductRepository : IProductRepository
 {
+    const int _MaxSize = 2;
+
     // In a real app, this would be a database context
     public static List<ProductData> AllProducts { get; set; } = new List<ProductData>
     {

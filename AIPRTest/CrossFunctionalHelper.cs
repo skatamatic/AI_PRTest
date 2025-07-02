@@ -5,6 +5,8 @@ using System.Text;
 
 public static class CrossFunctionalHelper
 {
+    const int _max_functions = 2;
+
     // Added StandardizeCasing method
     private static string StandardizeCasing(string text)
     {
