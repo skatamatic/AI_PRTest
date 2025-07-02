@@ -1,5 +1,7 @@
 ﻿public class OrderFulfillmentService : IOrderFulfillmentService
 {
+    private const string ORDER_ITEMS_MUST_CONTAIN_ITEMS_LOG = "Order must contain items.";
+
     private readonly IProductRepository _productRepo;
     private readonly IOrderRepository _orderRepo;
     private readonly IPaymentGateway _paymentGateway;
@@ -20,7 +22,7 @@
     public OrderData PlaceOrder(string customerId, List<CreateOrderItemDetail> items)
     {
         if (items == null || !items.Any())
-            throw new ArgumentException("Order must contain items.");
+            throw new ArgumentException(ORDER_ITEMS_MUST_CONTAIN_ITEMS_LOG);
 
         var orderItemsData = new List<OrderItemData>();
         decimal totalAmount = 0;
