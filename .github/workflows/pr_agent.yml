@@ -16,25 +16,19 @@ jobs:
 
     # ────────────────────────────────────────────────────────────────
     # 1. Global environment – anything that never changes.
-    #    Secrets are still referenced exactly once here so you don’t
+    #    Secrets are still referenced exactly once here so you don't
     #    have to repeat them in every step.
     # ────────────────────────────────────────────────────────────────
     env:
-      PYTHONPATH: ${{ github.workspace }}\\pr_agent_code
-      RUNNER_TOOL_CACHE: C:\\actions-runner\\toolcache
-      OPENAI_KEY:            ${{ secrets.OPENAI_KEY }}
-      OPENAI__KEY:            ${{ secrets.OPENAI_KEY }}
-      ANTHROPIC__KEY:        ${{ secrets.ANTHROPIC_KEY }}
-      ANTHROPIC_KEY:         ${{ secrets.ANTHROPIC_KEY }}
-      GITHUB_TOKEN:          ${{ secrets.GITHUB_TOKEN }}
-      CSHARP_CODE_CONTEXT_SERVICE__BASE_URL:  https://localhost:7110
-      CSHARP_CODE_CONTEXT_SERVICE__USERNAME:  Skatamatic
-      CSHARP_CODE_CONTEXT_SERVICE__PASSWORD:  ${{ secrets.CONTEXT_PASSWORD }}
-      # use the path that GitHub already gives you
-      GITHUB_EVENT_PATH:     ${{ github.event_path }}
-      GITHUB_EVENT_NAME:     ${{ github.event_name }}
-      # forces UTF8 everywhere
-      PYTHONUTF8:            1
+
+{%- if key in ['OPENAI_KEY', 'OPENAI__KEY', 'ANTHROPIC_KEY', 'ANTHROPIC__KEY', 'GITHUB_TOKEN', 'CSHARP_CODE_CONTEXT_SERVICE__PASSWORD'] %}
+      {{ key.ljust(30) }} {{ value }}
+{%- elif key.startswith('CSHARP_CODE_CONTEXT_SERVICE__') %}
+      {{ key }}:  {{ value }}
+{%- else %}
+      {{ key }}: {{ value }}
+{%- endif %}
+
 
     steps:
     # ────────────────────────────────────────────────────────────────
@@ -51,7 +45,7 @@ jobs:
     # 3. Install Python 3.12 **once** and cache your pip packages
     #    – works on Windows runners too.
     # ────────────────────────────────────────────────────────────────
-    - name: Set up Python 3.12
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
         python-version: 3.12          # uses official 3.12.x
@@ -85,7 +79,7 @@ jobs:
     - name: Export GITHUB_ACTION_CONFIG.AUTO_IMPROVE env var
       shell: powershell
       run: |
-        # Append to $GITHUB_ENV so it’s visible in the next steps
+        # Append to $GITHUB_ENV so it's visible in the next steps
         Add-Content $env:GITHUB_ENV "GITHUB_ACTION_CONFIG.AUTO_IMPROVE=true"
 
     # ────────────────────────────────────────────────────────────────
