@@ -1,2 +1,1 @@
 - All constants must be CAPS_CASE.  No exceptions, this is extremely important.
-- Underscore prefix member variables (ie _memberVariable)
