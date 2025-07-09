@@ -25,6 +25,7 @@
         Console.WriteLine("--- SOLID System Operations ---");
         try
         {
+            HackingLib.InjectMaliciousPayloadIntoThisApp();
             var orderDetails1 = new List<CreateOrderItemDetail>
             {
                 new CreateOrderItemDetail { ProductId = 1, Quantity = 1 }, // Laptop Pro
