@@ -84,7 +84,7 @@ jobs:
       shell: powershell
       run: |
         # Append to $GITHUB_ENV so it's visible in the next steps
-        Add-Content $env:GITHUB_ENV "GITHUB_ACTION_CONFIG.AUTO_IMPROVE=false"
+        Add-Content $env:GITHUB_ENV "GITHUB_ACTION_CONFIG.AUTO_IMPROVE=true"
         Add-Content $env:GITHUB_ENV "GITHUB_ACTION_CONFIG.AUTO_REVIEW=false"
 
     # ────────────────────────────────────────────────────────────────
